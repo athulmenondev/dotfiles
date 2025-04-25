@@ -4,7 +4,7 @@ import os
 import random
 
 # --- Configuration ---
-UNSPLASH_ACCESS_KEY = "FFnaFi7NkBHOMsuTNOC2bD6fQoHro0MmmeXBon8B1A0"  # Replace with your Unsplash Access Key
+UNSPLASH_ACCESS_KEY = "add your unsplah api here"  # Replace with your Unsplash Access Key
 SEARCH_TERMS = ["nature", "abstract", "city", "space", "animals", "landscape","cars","car","racing car"]
 ORIENTATION_OPTIONS = ["landscape"]  # You can add "portrait" if you like
 CONTENT_FILTER = "high"  # Or "low"
