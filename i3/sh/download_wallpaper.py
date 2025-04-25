@@ -4,7 +4,7 @@ import os
 import random
 
 # --- Configuration ---
-API_KEY = "37076604-b62b9903a565ff2265923b75f"  # Replace with your actual Pixabay API key
+API_KEY = "add your wallhavean apif"  # Replace with your actual Pixabay API key
 SEARCH_TERMS = [
    "model"
 ]
