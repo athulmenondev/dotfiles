@@ -4,7 +4,7 @@ import os
 import random
 
 # --- Configuration ---
-PEXELS_API_KEY = "qRtxlF8iV37ZMYziSQwmOU8vHQ7dejOdTx447akRAZopz8EvhIg3Bh54"  # Replace with your Pexels API Key
+PEXELS_API_KEY = "add your pexels api"  # Replace with your Pexels API Key
 SEARCH_TERMS = ["nature", "abstract", "city", "space", "animals", "landscape"]
 ORIENTATION_OPTIONS = ["landscape"]  # You can add "portrait" if you like
 SIZE = "large"  # Or "medium", "small"
