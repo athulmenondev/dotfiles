@@ -16,6 +16,6 @@ Install necessary packages listed belo
     
 ## Screenshots
 
-![Screenshot1](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![Screenshot1](https://github.com/athulmenondev/i3-config-files-mine/blob/main/screenshots/ss1.png)
 
-![Screenshot2](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![Screenshot2](https://github.com/athulmenondev/i3-config-files-mine/blob/main/screenshots/ss2.png)
