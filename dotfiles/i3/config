@@ -191,7 +191,7 @@ bar {
 gaps inner 10
 gaps outer 10
 smart_gaps off
-exec --no-startup-id /home/athul/Files/Scripts/sudoCommands.sh
+exec --no-startup-id /home/athul/Files/Scripts/sudoComannds.sh
 #exec_always feh --bg-fill /home/athul/Files/Wallpapers/9.jpg
 exec_always --no-startup-id /home/athul/Files/Scripts/wall.sh
 #exec_always --no-startup-id python3 /home/athul/Files/Scripts/download_wallpaper.py
