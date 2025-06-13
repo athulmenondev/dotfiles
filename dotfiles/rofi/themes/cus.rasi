@@ -1,0 +1,171 @@
+/* awesome_theme.rasi */
+
+configuration {
+    display-drun: "Applications:";
+    drun-display-format: "{icon} {name}";
+    font: "Hack Nerd Font Bold 14"; /* Applied Hack Nerd Font Bold */
+    modi: "drun";
+    show-icons: true;
+    icon-theme: "Papirus"; /* User's preferred icon theme */
+}
+
+@theme "/dev/null"
+
+/* --- Colors --- */
+/* User's base colors */
+* {
+    bg: #11121d;
+    bg-alt: #444b6a;
+    fg: #ffffff;
+    fg-alt: #787c99;
+
+    /* Extended color palette for accents and selected states */
+    al:       #00000000;  /* Transparent */
+    red:      #f7768eff;  /* Red for errors/alerts */
+    green:    #9ece6aff;  /* Green for positive indicators */
+    yellow:   #e0af68ff;  /* Yellow/orange accent */
+    blue:     #7aa2f7ff;  /* Blue accent */
+    magenta:  #ad8ee6ff;  /* Magenta accent */
+    cyan:     #44b9bfff;  /* Cyan accent */
+
+    selected-bg: @bg-alt; /* Use bg-alt for selected background, as per user's general color scheme */
+    selected-fg: @fg;     /* Use fg for selected foreground */
+    border-color: @blue; /* General border color, using accent blue */
+
+    /* Basic resets from user's base */
+    background-color: @bg;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    spacing: 0;
+}
+
+/* --- Window Settings --- */
+window {
+    background-color: @bg;
+    border-radius: 12px; /* Rounded corners for the window */
+    border: 2px;
+    border-color: @border-color;
+    padding: 20px; /* Padding inside the window */
+    width: 18%; /* Adjusted width for a compact power menu */
+
+    /* --- IMPORTANT: Position Settings --- */
+    location: north;      /* Position the window at the top, horizontally centered */
+    x-offset: 38%;        /* Offset to push it to the right (percentage of screen width) */
+    y-offset: 20px;       /* Offset from the top edge (positive moves down, useful for placing below i3bar) */
+    /* --- End Position Settings --- */
+
+    transparency: "real"; /* Enable real transparency if your compositor supports it */
+}
+
+/* --- Main Box (Input bar + List view) --- */
+mainbox {
+    background-color: @bg; /* Use user's bg */
+    children: [ "inputbar", "listview", "message" ]; /* Added message for completeness, if it was intended later */
+    spacing: 15px; /* Spacing between inputbar and listview */
+}
+
+/* --- Input Bar --- */
+inputbar {
+    background-color: @bg-alt; /* User's bg-alt for inputbar */
+    border-radius: 8px; /* Rounded corners for input bar */
+    padding: 12px; /* User's padding */
+    spacing: 10px;
+    children: [ "prompt", "entry" ]; /* Order of prompt and entry field */
+}
+
+prompt {
+    enabled: true; /* Show prompt (e.g., "run", "ssh", etc.) */
+    font: "Hack Nerd Font Bold 14"; /* Applied Hack Nerd Font Bold */
+    background-color: @bg-alt; /* Match inputbar background */
+    text-color: @blue; /* Color the prompt with an accent */
+    padding: 12px 0 0 12px; /* User's padding with prompt at top-left */
+}
+
+entry {
+    background-color: @bg-alt; /* User's bg-alt for entry */
+    text-color: @fg; /* User's fg for entry text */
+    placeholder-color: @fg-alt; /* Use fg-alt for placeholder */
+    placeholder: "Type to search..."; /* Custom placeholder text */
+    expand: true; /* Make entry expand to fill space */
+    font: "Hack Nerd Font Bold 14"; /* Applied Hack Nerd Font Bold */
+    padding: 12px; /* User's padding */
+}
+
+/* --- List View (Results) --- */
+listview {
+    background-color: @bg; /* User's bg for listview */
+    columns: 1; /* One column for the list of items */
+    lines: 8; /* User's preferred number of lines */
+    cycle: true; /* Wrap around when reaching end/beginning */
+    dynamic: true; /* Adjust height based on content */
+    fixed-height: false;
+    spacing: 5px; /* Spacing between items */
+}
+
+/* --- Elements (Individual Items in List View) --- */
+element {
+    background-color: @bg; /* Base background for elements */
+    text-color: @fg-alt; /* User's fg-alt for unselected text */
+    border-radius: 6px;
+    padding: 8px; /* REDUCED PADDING to make options smaller */
+}
+
+element selected { /* User's "element selected" block combined with my previous "element selected.normal" */
+    background-color: @selected-bg; /* Using the custom selected-bg */
+    text-color: @selected-fg; /* Using the custom selected-fg */
+    border-color: @blue; /* Highlight border for selected item */
+    border: 1px; /* Add a border to selected item */
+    border-radius: 6px;
+}
+
+element-text {
+    background-color: inherit; /* Inherit color from parent element */
+    text-color: inherit; /* Inherit color from parent element */
+    highlight: underline bold; /* Highlight matching text with underline and bold */
+    font: "Hack Nerd Font Bold 14"; /* Applied Hack Nerd Font Bold */
+    vertical-align: 0.5; /* User's vertical alignment */
+}
+
+element-icon {
+    size: 30; /* REDUCED ICON SIZE */
+    background-color: @al; /* Transparent background for icon */
+    padding: 0px 10px 0px 0px; /* Space between icon and text */
+}
+
+/* --- Scrollbar --- */
+scrollbar {
+    handle-color: @blue; /* Color of the scrollbar handle */
+    background-color: @bg-alt; /* Background of the scrollbar track */
+    width: 4px;
+    border-radius: 4px;
+    padding: 0px;
+}
+
+/* --- Message (Error/Info messages) --- */
+message {
+    background-color: @bg-alt;
+    border-radius: 8px;
+    padding: 10px;
+    border: 1px;
+    border-color: @red; /* Use red for message box border (e.g., when no results found) */
+    text-color: @red;
+}
+
+textbox {
+    background-color: @al;
+    text-color: inherit;
+    font: "Hack Nerd Font Bold 12"; /* Applied Hack Nerd Font Bold */
+}
+
+/* --- Using Font Awesome/Phosphor Icons --- */
+/* The user's base already sets icon-theme: "Papirus";
+   If you want to use custom icons via content property for prompt,
+   you need to ensure the specific font is installed and configured. */
+/* Example for a custom prompt using an icon if needed:
+prompt {
+    content: " "; // Magnifying glass icon from Font Awesome
+    font: "Font Awesome 6 Free Solid 14"; // Adjust font name and size as needed to match base font size
+    text-color: @blue;
+}
+*/
