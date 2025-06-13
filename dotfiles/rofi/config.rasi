@@ -6,6 +6,6 @@ configuration {
     display-drun: "Search";
 }
 
-@theme "./themes/cus"
+@theme "./themes/r"
 
 

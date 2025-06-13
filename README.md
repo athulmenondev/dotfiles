@@ -11,7 +11,7 @@ A highly customised work environment setup using i3 and lightm for debain based 
 Install necessary packages listed below
 
 ```bash
-  i3 i3blocks i3lock pulseaudio pavucontrol brightnesscrl alacritty picom diodon lightdm kitty thunar rofi mpv easyeffects
+  i3 i3blocks i3lock pulseaudio pavucontrol brightnesscrl alacritty picom diodon lightdm kitty thunar rofi mpv easyeffects ohmyzsh lsd
 ```
     
 ## Screenshots

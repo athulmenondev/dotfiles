@@ -28,6 +28,7 @@ bindsym $mod+Return exec --no-startup-id alacritty
 bindsym $mod+Shift+q kill
 
 bindsym $mod+d exec --no-startup-id dmenu_run -fn "DejaVu Sans Mono-10" -nb "#2E3440" -nf "#D8DEE9" -sb "#434C5E" -sf "#E5E9F0" -p "Run:"
+bindsym $mod+Shift+d exec rofi -show drun
 
 # change focus
 bindsym $mod+j focus left
@@ -175,7 +176,8 @@ for_window [class="^.*"] border pixel 0
 exec_always --no-startup-id "picom -b"
 bar {
 		i3bar_command i3bar --transparency
-        status_command i3blocks -c ~/.config/i3/i3blocks.conf
+        status_command SCRIPT_DIR='/home/athul/Files/Scripts' i3blocks -c ~/.config/i3/i3blocks.conf
+        tray_output primary
         colors {
 		background #00000000
 		separator #757575
@@ -184,13 +186,13 @@ bar {
 		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
 		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
 	}
-	padding 2 2
+	padding  2
     separator_symbol |
     position top
 }
 gaps inner 10
-gaps outer 10
-smart_gaps off
+gaps outer 5
+smart_gaps on
 exec --no-startup-id /home/athul/Files/Scripts/sudoComannds.sh
 #exec_always feh --bg-fill /home/athul/Files/Wallpapers/9.jpg
 exec_always --no-startup-id /home/athul/Files/Scripts/wall.sh
@@ -206,11 +208,12 @@ bindsym $mod+Shift+v  exec diodon
 #bindsym $mod+Shift+o exec i3lock --color "$bg-color"
 #bindsym $mod+Shift+z+o exec i3lock-fancy
 bindsym $mod+Shift+m exec setxkbmap us -variant colemak
-#bindsym $mod+Shift+p exec sudo poweroff
+bindsym Mod1+F4 exec bash ~/Files/Scripts/shutdown_menu.sh
 bindsym $mod+Shift+e exec i3-msg exit
 bindsym $mod+Shift+f exec i3-msg bar mode toggle
+bindsym $mod+Print exec flameshot gui
 #bindsym Print exec scrot  ~/Pictures/Screenshots/screenshot_$(date +%Y-%m-%d_%H-%M-%S).png
-#bindsym Ctrl+p exec --no-startup-id sleep 0.1 && scrot -s ~/Pictures/Screenshots/screenshot_$(date +%Y-%m-%d_%H-%M-%S).png
+
 
 
 

@@ -1,0 +1,154 @@
+/* awesome_theme.rasi */
+
+configuration {
+    display-drun: "Applications:"; /* This prompt will now be visible as the heading */
+    drun-display-format: "{icon} {name}";
+    font: "Hack Nerd Font Bold 14"; /* Applied Hack Nerd Font Bold */
+    modi: "drun"; /* Your script will determine the mode, often 'drun' for menu options */
+    show-icons: true;
+    icon-theme: "Papirus"; /* User's preferred icon theme */
+}
+
+@theme "/dev/null"
+
+/* --- Colors --- */
+* {
+    bg: #11121d;
+    bg-alt: #444b6a;
+    fg: #ffffff;
+    fg-alt: #787c99;
+
+    al:       #00000000;  /* Transparent */
+    red:      #f7768eff;
+    green:    #9ece6aff;
+    yellow:   #e0af68ff;
+    blue:     #7aa2f7ff;
+    magenta:  #ad8ee6ff;
+    cyan:     #44b9bfff;
+
+    selected-bg: @bg-alt;
+    selected-fg: @fg;
+    border-color: #7dcfff;
+
+    background-color: @bg;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    spacing: 0;
+}
+
+/* --- Window Settings --- */
+window {
+    background-color: @bg;
+    border-radius: 12px;
+   border: 2px;
+    border-color: #89ddff;  /* vibrant blue */
+    background-color: #11121d;
+    padding: 20px; /* Padding inside the window */
+    width: 13%; /* Current width */
+
+    /* --- IMPORTANT: Position Settings for Top-Right --- */
+    location: north;      /* Position at the top edge, horizontally centered initially */
+    x-offset: 42.8%;        /* Adjusted offset to push it right: (50% screen - 15% window_half_width - margin) */
+    y-offset: 4.1%;       /* Offset from the top edge (positive moves down) */
+    /* --- End Position Settings --- */
+
+    transparency: "real";
+}
+
+/* --- Main Box (Input Bar as Heading + List View) --- */
+mainbox {
+    background-color: @bg;
+    children: [ "inputbar", "listview", "message" ];
+    spacing: 0px;
+}
+
+/* --- Input Bar (Now acting as the Heading only) --- */
+inputbar {
+    background-color: @bg-alt;
+    border-radius: 8px;
+    padding: 12px; /* Uniform padding for vertical centering */
+    spacing: 0px;
+    children: [ "prompt" ];
+    /* Removed: expand: true; */
+    horizontal-align: 0.5; /* Added: Center the inputbar itself */
+}
+
+prompt {
+    enabled: true;
+    font: "Hack Nerd Font Bold 14";
+    background-color: @al;
+    text-color: @blue;
+    padding: 0px;
+    horizontal-align: 0.5;
+}
+
+
+/* --- List View (Results) --- */
+listview {
+    background-color: @bg;
+    columns: 1;
+    lines: 7;
+    cycle: true;
+    dynamic: true;
+    fixed-height: false;
+    spacing: 5px;
+}
+
+/* --- Elements (Individual Items in List View) --- */
+element {
+    background-color: @bg;
+    text-color: @fg-alt;
+    border-radius: 6px;
+    padding: 8px;
+}
+
+element selected {
+    background-color: @selected-bg;
+    text-color: @selected-fg;
+    border-color: @blue;
+    border: 1px;
+    border-radius: 6px;
+}
+
+element-text {
+    background-color: inherit;
+    text-color: inherit;
+    highlight: underline bold;
+    font: "Hack Nerd Font Bold 14";
+    vertical-align: 0.5;
+}
+
+element-icon {
+    size: 30;
+    background-color: @al;
+    padding: 0px 10px 0px 0px;
+}
+
+/* --- Scrollbar --- */
+scrollbar {
+    handle-color: @blue;
+    background-color: @bg-alt;
+    width: 4px;
+    border-radius: 4px;
+    padding: 0px;
+}
+
+/* --- Message (Error/Info messages) --- */
+message {
+    background-color: @bg-alt;
+    border-radius: 8px;
+    padding: 10px;
+    border: 1px;
+    border-color: @red;
+    text-color: @red;
+}
+
+textbox {
+    background-color: @al;
+    text-color: inherit;
+    font: "Hack Nerd Font Bold 12";
+}
+
+/* --- Using Font Awesome/Phosphor Icons --- */
+/* If you use icons, ensure your Rofi script correctly provides them for each power option. */
