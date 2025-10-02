@@ -6,6 +6,6 @@ configuration {
     display-drun: "Search";
 }
 
-@theme "./themes/r"
+@theme "./themes/rounded-corners-purple"
 
 

@@ -1,0 +1,120 @@
+[global]
+    ### Display ###
+
+    # Display notifications on monitor with mouse focus
+    follow = mouse
+    # Set position, width, and height
+    origin = top-center
+    offset = (13, 35) # 5px from right, 60px from top
+    width = (200,800)
+    height = (30, 200)# Max height of a single notification. Set to 0 for auto-sizing if content fits.
+    # Show number of hidden notifications
+    indicate_hidden = yes
+    # Shrink window if smaller than width
+    shrink = yes
+    # Set transparency of notifications (requires a compositor like Picom)
+    transparency = 70 # You had 0, meaning fully opaque. Change to 5-15 for slight transparency.
+    # Height of seperators (if you have multiple notifications stacked)
+    separator_height = 2
+    # Text and seperator padding
+    padding = 8
+    # Horizontal padding
+    horizontal_padding = 8
+    # Width of frame around window
+    frame_width = 4
+    # Color of frame around window
+    frame_color = "#7dcfff"
+    # Sort messages by urgency
+    sort = yes
+    # Idle seconds (how long Dunst waits before showing notifications if many come at once)
+    idle_threshold = 0
+    background = "#ff0000"
+    foreground = "#ffffffff"
+
+    ### Text ###
+
+    # Set font of notifications
+    #font = Iosevka 10
+    font=Hack Nerd Font 10
+    # Markup parsing
+    markup = full
+    # Message format:
+    # %a - appname
+    # %s - summary
+    # %b - body
+    # %i - iconname (with path)
+    # %I - iconname (without path)
+    # %p - progress value (if set)
+    # %n - progress value no extra characters
+    # %% - literal %
+    format = "<b>%a</b>\n%s\n%b"
+    # Align message text horizontally
+    alignment = center
+    # Align message text vertically
+    vertical_alignment = center
+    # Show age of message if message is older than x seconds
+    show_age_threshold = -1
+    # Split notifications into multiple lines
+    word_wrap = no
+    # If message too long, add ellipsize to...
+    ellipsize = middle
+    # Ignore newlines in notifications
+    ignore_newline = no
+    # Stack duplicate notifications
+    stack_duplicates = true
+    # Hide number of duplicate notifications
+    hide_duplicate_count = true
+    # Show indicatiors for urls and actions (e.g. [U] for URL, [A] for action)
+    show_indicators = no
+
+    ### Icons ###
+
+    # Disable icons
+    icon_position = right # If you want icons, set this to left or right and ensure icon_theme is set
+
+    ### History ###
+
+    # Length of history (number of notifications stored for dunstctl history-pop)
+    history_length = 20
+
+    ### Misc ###
+
+    # Dmenu path (used if a notification offers an action)
+    dmenu = /usr/bin/dmenu -p dunst:
+    # Browser path (used if a notification offers to open a URL)
+    browser = /usr/bin/firefox -new-tab
+    # Always run scripts associated with notifications
+    always_run_script = true
+    # Title of notification window (for your window manager)
+    title = Dunst
+    # Notification class (for your window manager)
+    class = Dunst
+    # Corner radius of dunst window
+    corner_radius = 15
+    # Ignore dbus closeNotification message (useful for some apps that try to auto-close)
+    ignore_dbusclose = false
+
+    ### Mouse ###
+
+    # Left click action
+    mouse_left_click = close_current
+    # Middle click action
+    mouse_middle_click = do_action
+    # Right click action
+    mouse_right_click = do_action
+
+# [shortcuts] section is removed and handled by i3 config now
+
+[urgency_normal]
+
+    # Normal urgency notifications
+    background = "#202632AA"
+    foreground = "#ffffff"
+    timeout = 5
+
+[urgency_critical]
+
+    # Critical urgency notifications
+    background = "#ff0000ff"
+    foreground = "#ffffffff"
+    timeout = 0

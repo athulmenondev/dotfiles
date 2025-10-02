@@ -1,13 +1,17 @@
 set $mod Mod4
+set $Scripts /home/athul/Files/Scripts
 
-#font pango:monospace 8
-font pango:SpaceGrotesk-Regular 10 
+font pango:Agave Nerd Font 10 
 
 exec --no-startup-id dex --autostart --environment i3
-
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --noforkX
+exec --no-startup-id fusuma -d
+exec --no-startup-id snixembed
+exec --no-startup-id iwgtk -i
 
 set $refresh_i3status killall -SIGUSR1 i3status
+
+#keybinds
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
@@ -16,17 +20,8 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +5%
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
 
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
-
-tiling_drag modifier titlebar
-
-# start a terminal
 bindsym $mod+Return exec --no-startup-id alacritty
-
-# kill focused window
 bindsym $mod+Shift+q kill
-
 bindsym $mod+d exec --no-startup-id dmenu_run -fn "DejaVu Sans Mono-10" -nb "#2E3440" -nf "#D8DEE9" -sb "#434C5E" -sf "#E5E9F0" -p "Run:"
 bindsym $mod+Shift+d exec rofi -show drun
 
@@ -54,16 +49,11 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-# split in horizontal orientation
 bindsym $mod+h split h
-
-# split in vertical orientation
 bindsym $mod+v split v
 
-# enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
-# change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
@@ -80,50 +70,13 @@ bindsym $mod+space focus mode_toggle
 # focus the child container
 #bindsym $mod+d focus child
 
-# Define names for default workspaces for which we configure key bindings later on.
-# We use variables to avoid repeating the names in multiple places.
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+tiling_drag modifier titlebar
 
-# switch to workspace
-bindsym $mod+1 workspace number $ws1
-bindsym $mod+2 workspace number $ws2
-bindsym $mod+3 workspace number $ws3
-bindsym $mod+4 workspace number $ws4
-bindsym $mod+5 workspace number $ws5
-bindsym $mod+6 workspace number $ws6
-bindsym $mod+7 workspace number $ws7
-bindsym $mod+8 workspace number $ws8
-bindsym $mod+9 workspace number $ws9
-bindsym $mod+0 workspace number $ws10
-
-# move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace number $ws1
-bindsym $mod+Shift+2 move container to workspace number $ws2
-bindsym $mod+Shift+3 move container to workspace number $ws3
-bindsym $mod+Shift+4 move container to workspace number $ws4
-bindsym $mod+Shift+5 move container to workspace number $ws5
-bindsym $mod+Shift+6 move container to workspace number $ws6
-bindsym $mod+Shift+7 move container to workspace number $ws7
-bindsym $mod+Shift+8 move container to workspace number $ws8
-bindsym $mod+Shift+9 move container to workspace number $ws9
-bindsym $mod+Shift+0 move container to workspace number $ws10
-
-# reload the configuration file
 bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
-# resize window (you can also use the mouse for that)
+
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
 
@@ -150,14 +103,51 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+#workspace
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+#workspace "9" output HDMI-1
+#workspace "10" output HDMI-1
+
+
+# switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
 
 set $bg-color	         #2f343f
 set $inactive-bg-color   #2f343f
 set $text-color          #f3f4f5
 set $inactive-text-color #676E7D
 set $urgent-bg-color     #E53935
-
-
 
 # window colors
 #                       border              background         text                 indicator
@@ -169,15 +159,10 @@ client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color      
 hide_edge_borders both
 for_window [class="^.*"] border pixel 0
 
-
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-#background $bg-color
-exec_always --no-startup-id "picom -b"
+exec --no-startup-id "picom -b"
 bar {
 		i3bar_command i3bar --transparency
         status_command SCRIPT_DIR='/home/athul/Files/Scripts' i3blocks -c ~/.config/i3/i3blocks.conf
-        tray_output primary
         colors {
 		background #00000000
 		separator #757575
@@ -193,36 +178,25 @@ bar {
 gaps inner 10
 gaps outer 5
 smart_gaps on
-exec --no-startup-id /home/athul/Files/Scripts/sudoComannds.sh
-#exec_always feh --bg-fill /home/athul/Files/Wallpapers/9.jpg
-exec_always --no-startup-id /home/athul/Files/Scripts/wall.sh
-#exec_always --no-startup-id python3 /home/athul/Files/Scripts/download_wallpaper.py
-#exec_always --no-startup-id python3 /home/athul/Files/Scripts/download_wallpaperu.py
-#exec_always --no-startup-id python3 /home/athul/Files/Scripts/dw.py
-#exec_always --no-startup-id /home/athul/Files/Scripts/sw.sh
-#exec_always i3-msg bar mode toggle
 
-
+#custom(keybinds)
 bindsym $mod+Shift+i exec intellij
+bindsym $mod+t exec thunar
 bindsym $mod+Shift+v  exec diodon
-#bindsym $mod+Shift+o exec i3lock --color "$bg-color"
-#bindsym $mod+Shift+z+o exec i3lock-fancy
-bindsym $mod+Shift+m exec setxkbmap us -variant colemak
+bindsym $mod+Shift+z exec i3lock-fancy
+bindsym $mod+Shift+m exec --no-startup-id setxkbmap us
 bindsym Mod1+F4 exec bash ~/Files/Scripts/shutdown_menu.sh
 bindsym $mod+Shift+e exec i3-msg exit
 bindsym $mod+Shift+f exec i3-msg bar mode toggle
 bindsym $mod+Print exec flameshot gui
-#bindsym Print exec scrot  ~/Pictures/Screenshots/screenshot_$(date +%Y-%m-%d_%H-%M-%S).png
+bindsym $mod+Shift+Print exec flameshot full -p ~/Pictures
 
-
-
-
-# Automatically set up workspace 10
-#assign [workspace="10"] →   # (Optional) Set a lock icon for this workspace
-
-# Start a floating terminal with tty-clock
-exec --no-startup-id i3-msg 'workspace 10; exec alacritty -e tty-clock -c -C 5 -s'
+#custom(startup or reload)
+exec --no-startup-id /home/athul/Files/Scripts/sudoComannds.sh
 exec --no-startup-id /home/athul/Files/Scripts/monitor_setup.sh
+exec --no-startup-id i3-msg 'workspace 10; exec alacritty -e tty-clock -c -C 5 -s'
 
-#for_window [title="Clock"] floating enable, sticky enable, border pixel 0, move position center, resize set 800 200
-#for_window [title="SystemInfo"] floating enable, sticky enable, border pixel 0, move position center, resize set 800 400
+#exec_always feh --bg-fill /home/athul/Files/Wallpapers/9.jpg
+exec_always --no-startup-id $Scripts/wall.sh
+# if U use colmak uncomment this line
+#exec_always --no-startup-id bash -c "sleep 1 && setxkbmap us -variant colemak"
