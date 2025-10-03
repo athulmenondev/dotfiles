@@ -1,1 +1,1 @@
-echo asmenon | sudo -S tlp setcharge 40 80
+echo <your_password> | sudo -S tlp setcharge 40 80
