@@ -189,14 +189,16 @@ bindsym Mod1+F4 exec bash ~/Files/Scripts/shutdown_menu.sh
 bindsym $mod+Shift+e exec i3-msg exit
 bindsym $mod+Shift+f exec i3-msg bar mode toggle
 bindsym $mod+Print exec flameshot gui
-bindsym $mod+Shift+Print exec flameshot full -p ~/Pictures
+bindsym $mod+Shift+Print exec flameshot full -p ~/Pictures'
+bindsym $mod+Shift+w exec wch
+bindsym $mod+Shift+g exec flatpak run org.gimp.GIMP
 
 #custom(startup or reload)
 exec --no-startup-id /home/athul/Files/Scripts/sudoComannds.sh
 exec --no-startup-id /home/athul/Files/Scripts/monitor_setup.sh
 exec --no-startup-id i3-msg 'workspace 10; exec alacritty -e tty-clock -c -C 5 -s'
 
-#exec_always feh --bg-fill /home/athul/Files/Wallpapers/9.jpg
-exec_always --no-startup-id $Scripts/wall.sh
+exec_always feh --bg-fill /home/athul/Pictures/wallpaper.jpg
+#exec_always --no-startup-id $Scripts/wall.sh
 # if U use colmak uncomment this line
 #exec_always --no-startup-id bash -c "sleep 1 && setxkbmap us -variant colemak"

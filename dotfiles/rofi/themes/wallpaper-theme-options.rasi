@@ -1,0 +1,59 @@
+/* confirmation-theme.rasi */
+/* A simple, compact theme for confirmation dialogs. */
+
+@theme "/dev/null"
+
+/* --- Colors (inherit from main theme for consistency) --- */
+* {
+    text-color:        #E0E0E0;
+    background-color:  #212121E6;
+    accent:            #8BE9FD;
+    selected-bg:       @accent;
+    selected-fg:       #212121;
+    font:              "sans-serif 12";
+}
+
+/* --- Window (Small and Centered) --- */
+window {
+    location:         center;
+    width:            300px; /* Small, fixed width */
+    border:           0px;
+    border-radius:    10px;
+    padding:          20px;
+    background-color: @background-color;
+}
+
+/* --- Main Layout (Just the list) --- */
+mainbox {
+    children: [ listview ]; /* No input bar */
+}
+
+/* --- List View (Vertical) --- */
+listview {
+    columns:          1; /* Single column for a vertical list */
+    lines:            3; /* Show all 3 options */
+    spacing:          10px;
+    cycle:            true;
+    dynamic:          true;
+    layout:           vertical;
+}
+
+/* --- Elements (The actual options) --- */
+element {
+    orientation:      horizontal;
+    padding:          12px 15px;
+    border-radius:    8px;
+    background-color: #303030;
+    children:         [ element-text ];
+}
+
+element selected {
+    background-color: @selected-bg;
+    text-color:       @selected-fg;
+}
+
+element-text {
+    horizontal-align: 0.5; /* Center the text */
+    text-color:       inherit;
+    background-color: transparent;
+}

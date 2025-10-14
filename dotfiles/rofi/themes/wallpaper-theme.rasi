@@ -1,0 +1,136 @@
+/* professional-wallpaper-selector.rasi */
+
+@theme "/dev/null"
+
+/* --- Colors --- */
+* {
+    /* Basic text and background */
+    text-color:       #E0E0E0; /* Light gray */
+    background-color: #212121E6; /* Very dark gray, slightly transparent */
+
+    /* Accent color for highlights and borders */
+    accent:           #8BE9FD; /* Cyan/Aqua */
+    urgent-red:       #F44336; /* A standard red for urgent items */
+
+    /* Selected item colors */
+    selected-bg:      @accent;
+    selected-fg:      #212121; /* Dark text on accent background */
+
+    /* Placeholder and muted text */
+    muted-text:       #A0A0A0; /* Muted gray for placeholder */
+
+    /* Font stack for maximum compatibility and clean look */
+    font:             "sans-serif 11";
+}
+
+/* --- Global Properties --- */
+window {
+    location:         center;
+    width:            70%;
+    border:           0px;
+    border-radius:    12px;
+    padding:          30px;
+    background-color: @background-color;
+}
+
+mainbox {
+    children:         [ inputbar, listview ];
+    spacing:          25px;
+}
+
+/* --- Input Bar (Search / Filter) --- */
+inputbar {
+    padding:          15px 20px;
+    border-radius:    10px;
+    background-color: #303030; /* Slightly lighter background for input */
+    children:         [ prompt, entry ];
+}
+
+prompt {
+    enabled:          true;
+    text-color:       @accent;
+    padding:          0 15px 0 0;
+    font:             "sans-serif bold 12";
+}
+
+entry {
+    placeholder:      "Search wallpapers...";
+    placeholder-color: @muted-text;
+    text-color:       @text-color;
+}
+
+/* --- List View (The Grid of Wallpapers) --- */
+listview {
+    columns:          4;
+    lines:            3;
+    spacing:          25px;
+    cycle:            true;
+    dynamic:          true;
+    fixed-height:     true;
+    scrollbar:        true;
+    padding:          0 5px;
+}
+
+/* --- Elements (Each Wallpaper "Card") --- */
+element {
+    orientation:      vertical; /* Image on top, text below */
+    padding:          18px;
+    border-radius:    12px;
+    background-color: #303030; /* Card background */
+    children:         [ element-icon, element-text ];
+}
+
+element normal.active {
+    background-color: @selected-bg;
+    text-color:       @selected-fg;
+}
+
+element normal.urgent {
+    background-color: @urgent-red;
+    text-color:       @selected-fg;
+}
+
+element selected {
+    background-color: @selected-bg;
+    text-color:       @selected-fg;
+    border-radius:    12px; /* Ensure radius is consistent */
+}
+
+element-text {
+    horizontal-align: 0.5; /* Center the filename below the image */
+    text-color:       inherit;
+    background-color: transparent;
+    margin:           12px 0 0 0; /* Space between image and text */
+    font:             "sans-serif 11"; /* Smaller font for filename */
+}
+
+element-icon {
+    size:             10em; /* Prominent thumbnail size */
+    horizontal-align: 0.5;
+    border-radius:    8px; /* Slightly rounded image corners */
+}
+
+/* --- Scrollbar --- */
+scrollbar {
+    handle-color:     @accent;
+    background-color: #303030;
+    width:            6px;
+    border-radius:    3px;
+    padding:          0px;
+    margin:           0 5px;
+}
+
+/* --- Message / Error Display --- */
+message {
+    background-color: #303030;
+    border-radius:    8px;
+    padding:          15px;
+    text-color:       @accent;
+    font:             "sans-serif italic 12";
+}
+
+textbox {
+    text-color:       inherit;
+    background-color: transparent;
+}
+
