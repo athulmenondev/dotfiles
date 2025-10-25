@@ -6,22 +6,26 @@
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
-
 # This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# but WITHOUT ANY WARRANTY;
+# without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+# See the
 # GNU General Public License for more details.
 
 # You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+# along with this program.
+# If not, see <http://www.gnu.org/licenses/>.
 
 #------------------------------------------------------------------------
-if [[ -z "$INTERFACE" ]] ; then
+if [[ -z "$INTERFACE" ]] ;
+then
     INTERFACE="${BLOCK_INSTANCE:-wlan0}"
 fi
 #------------------------------------------------------------------------
 
-# As per #36 -- It is transparent: e.g. if the machine has no battery or wireless
+# As per #36 -- It is transparent: e.g.
+# if the machine has no battery or wireless
 # connection (think desktop), the corresponding block should not be displayed.
 # Similarly, if the wifi interface exists but no connection is active, show
 # nothing
@@ -30,10 +34,12 @@ fi
 
 #------------------------------------------------------------------------
 
-SSID=$(iw "$INTERFACE" info | awk '/ssid/ {$1=""; print $0}')
+# Get just the SSID name
+SSID=$(/usr/sbin/iw "$INTERFACE" info | awk '/ssid/ {print $2}')
 
 #------------------------------------------------------------------------
 
-echo "$SSID" # full text
-echo "$SSID" # short text
+# Add a Wi-Fi icon () before the name
+echo " $SSID" # full text
+echo " $SSID" # short text
 echo "#00FF00" # color

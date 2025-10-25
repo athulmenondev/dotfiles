@@ -20,7 +20,7 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +5%
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
 
-bindsym $mod+Return exec --no-startup-id alacritty
+bindsym $mod+Return exec --no-startup-id kitty
 bindsym $mod+Shift+q kill
 bindsym $mod+d exec --no-startup-id dmenu_run -fn "DejaVu Sans Mono-10" -nb "#2E3440" -nf "#D8DEE9" -sb "#434C5E" -sf "#E5E9F0" -p "Run:"
 bindsym $mod+Shift+d exec rofi -show drun
@@ -142,7 +142,7 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
-
+#original
 set $bg-color	         #2f343f
 set $inactive-bg-color   #2f343f
 set $text-color          #f3f4f5
@@ -155,6 +155,9 @@ client.focused          $bg-color           $bg-color          $text-color      
 client.unfocused        $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
 client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
 client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #00ff00
+
+
+
 
 hide_edge_borders both
 for_window [class="^.*"] border pixel 0
@@ -170,7 +173,7 @@ bar {
 		focused_workspace  $bg-color          $bg-color          $text-color
 		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
 		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
-	}
+		}
 	padding  2
     separator_symbol |
     position top
@@ -190,7 +193,8 @@ bindsym $mod+Shift+e exec i3-msg exit
 bindsym $mod+Shift+f exec i3-msg bar mode toggle
 bindsym $mod+Print exec flameshot gui
 bindsym $mod+Shift+Print exec flameshot full -p ~/Pictures'
-bindsym $mod+Shift+w exec wch
+#bindsym $mod+Shift+w exec ~/Files/Scripts/wsh.sh
+bindsym $mod+Shift+w exec --no-startup-id systemd-run --user /home/athul/Files/Scripts/wsh.sh
 bindsym $mod+Shift+g exec flatpak run org.gimp.GIMP
 
 #custom(startup or reload)
@@ -198,7 +202,14 @@ exec --no-startup-id /home/athul/Files/Scripts/sudoComannds.sh
 exec --no-startup-id /home/athul/Files/Scripts/monitor_setup.sh
 exec --no-startup-id i3-msg 'workspace 10; exec alacritty -e tty-clock -c -C 5 -s'
 
-exec_always feh --bg-fill /home/athul/Pictures/wallpaper.jpg
+#exec_always feh --bg-fill /home/athul/Pictures/wallpaper.jpg
+exec feh --bg-fill /home/athul/Pictures/wallpaper.jpg
+exec --no-startup-id exec wal -i Pictures/wallpaper.jpg
+
+#load colors using pywall
+#exec --no-startup-id xrdb -merge $HOME/.cache/wal/colors.Xresources
 #exec_always --no-startup-id $Scripts/wall.sh
 # if U use colmak uncomment this line
 #exec_always --no-startup-id bash -c "sleep 1 && setxkbmap us -variant colemak"
+
+

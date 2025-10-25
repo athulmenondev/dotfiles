@@ -21,8 +21,8 @@ columns = 160
 lines = 80
 
 [cursor.style]
-shape= "Beam"
-blinking = "Never"
+shape= "Block"
+blinking = "on"
 
 [colors]
 #transparent_background_colors = true
@@ -36,7 +36,7 @@ TERM = "xterm-256color"
 #normal.family = "MesloLGS Nerd Font Mono"#
 normal.family = "HackNerdFont"
 normal.style = "Regular"
-size = 14.0
+size = 10.0
 
 [font.bold]
 #family = "MesloLGS Nerd Font Mono"

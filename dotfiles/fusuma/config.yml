@@ -1,0 +1,43 @@
+# ~/.config/fusuma/config.yml
+#
+# CORRECTED VERSION
+#
+swipe:
+  3:
+    left:
+      command: 'i3-msg workspace prev'
+    right:
+      command: 'i3-msg workspace next'
+    up:
+      command: 'i3-msg workspace back_and_forth'
+    down:
+      command: 'i3-msg workspace back_and_forth'
+  4:
+    left:
+      command: 'i3-msg move container to workspace next'
+    right:
+      command: 'i3-msg move container to workspace prev'
+    up:
+      command: 'i3-msg move scratchpad'
+    down:
+      command: 'i3-msg scratchpad show'
+  5: # Corrected indentation
+    left:
+      # Corrected command syntax
+      command: 'bash /home/athul/Files/Script/shutdown_menu.sh'
+pinch:
+  in:
+    # This was likely a copy-paste error. 'pinch in' is more intuitive for closing.
+    command: 'i3-msg kill' 
+  out:
+    command: 'i3-msg fullscreen toggle'
+
+# Optional: Add thresholds to fine-tune sensitivity
+threshold:
+  swipe: 0.4
+  pinch: 0.4
+
+# Optional: Define gesture update interval
+interval:
+  swipe: 0.1
+  pinch: 0.1

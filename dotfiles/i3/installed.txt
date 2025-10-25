@@ -1,7 +1,0 @@
-#installed packages
-
-tlp
-picom
-i3 blocks
-i3lock fancy
-

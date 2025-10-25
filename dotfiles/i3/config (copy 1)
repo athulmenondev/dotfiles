@@ -5,6 +5,9 @@ font pango:Agave Nerd Font 10
 
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --noforkX
+exec --no-startup-id fusuma -d
+exec --no-startup-id snixembed
+exec --no-startup-id iwgtk -i
 
 set $refresh_i3status killall -SIGUSR1 i3status
 
@@ -111,6 +114,9 @@ set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
+#workspace "9" output HDMI-1
+#workspace "10" output HDMI-1
+
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -175,6 +181,7 @@ smart_gaps on
 
 #custom(keybinds)
 bindsym $mod+Shift+i exec intellij
+bindsym $mod+t exec thunar
 bindsym $mod+Shift+v  exec diodon
 bindsym $mod+Shift+z exec i3lock-fancy
 bindsym $mod+Shift+m exec --no-startup-id setxkbmap us
@@ -182,14 +189,19 @@ bindsym Mod1+F4 exec bash ~/Files/Scripts/shutdown_menu.sh
 bindsym $mod+Shift+e exec i3-msg exit
 bindsym $mod+Shift+f exec i3-msg bar mode toggle
 bindsym $mod+Print exec flameshot gui
-bindsym $mod+Shift+Print exec flameshot full -p ~/Pictures
+bindsym $mod+Shift+Print exec flameshot full -p ~/Pictures'
+bindsym $mod+Shift+w exec wch
+bindsym $mod+Shift+g exec flatpak run org.gimp.GIMP
 
 #custom(startup or reload)
 exec --no-startup-id /home/athul/Files/Scripts/sudoComannds.sh
 exec --no-startup-id /home/athul/Files/Scripts/monitor_setup.sh
 exec --no-startup-id i3-msg 'workspace 10; exec alacritty -e tty-clock -c -C 5 -s'
 
-#exec_always feh --bg-fill /home/athul/Files/Wallpapers/9.jpg
-exec_always --no-startup-id $Scripts/wall.sh
+exec_always feh --bg-fill /home/athul/Pictures/wallpaper.jpg
+#exec_always --no-startup-id $Scripts/wall.sh
 # if U use colmak uncomment this line
-exec_always --no-startup-id bash -c "sleep 1 && setxkbmap us -variant colemak"
+#exec_always --no-startup-id bash -c "sleep 1 && setxkbmap us -variant colemak"
+
+#load colors using pywall
+exec --no-startup-id xrdb -merge $HOME/.cache/wal/colors.Xresources

@@ -21,6 +21,7 @@ window {
     border-radius:    10px;
     padding:          20px;
     background-color: @background-color;
+    gap:100px;
 }
 
 /* --- Main Layout (Just the list) --- */
