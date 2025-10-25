@@ -7,7 +7,10 @@ A highly customised work environment setup using i3 and lightm for debain based 
 Install necessary packages listed below
 
 ```bash
-  i3 i3blocks i3lock-fancy pulseaudio brightnessctl alacritty picom diodon lightdm thunar rofi dmenu flameshot fusuma feh dex xss-lock iwgtk ohmyzsh lsd tty-clock pavucontrol kitty
+  i3 i3blocks picom rofi dunst lightdm lightdm-gtk-greeter alacritty kitty zsh thunar btop htop cava
+
+  easyeffects fastfetch flameshot mpv network-manager python3 feh nitrogen ruby libinput-tools xdotool
+
 ```
 
 ## Screenshots
