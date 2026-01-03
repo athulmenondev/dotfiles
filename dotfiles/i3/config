@@ -1,15 +1,38 @@
 set $mod Mod4
 set $Scripts /home/athul/Files/Scripts
+#exec --no-startup-id systemd-run --user wal -i /home/athul/pictures/wallpaper.jpg
 
-font pango:Agave Nerd Font 10 
+#font pango:Agave Nerd Font 10
+font pango:Stack Sans Headline Medium 10
+
+#exec --no-startup-id xrdb -merge ~/.cache/wal/colors.Xresources
+#i3bar(pywall)
+#set_from_resource $bar-text-color i3wm.color0 #D8DEE9
+#set_from_resource $bar-inactive-text-color i3wm.color15 #4C566A
+#set_from_resource $bar-bg-color i3wm.color7 #2E3440
+#set_from_resource $bar-inactive-bg-color i3wm.color10 #3B4252
+#set $bar-urgent-bg-color #E53935
+
+#fix
+#i3bar(pywall)
+# Using 'set' with hardcoded values ensures i3 can parse the config on startup,
+# avoiding the "set_from_resource" error when Xresources haven't loaded yet.
+set $bar-text-color #D8DEE9
+set $bar-inactive-text-color #4C566A
+set $bar-bg-color #2E3440
+set $bar-inactive-bg-color #3B4252
+set $bar-urgent-bg-color #E53935
+
 
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --noforkX
 exec --no-startup-id fusuma -d
 exec --no-startup-id snixembed
 exec --no-startup-id iwgtk -i
+#exec --no-startup-id wal -i /home/athul/Pictures/wallpaper.jpg
 
-set $refresh_i3status killall -SIGUSR1 i3status
+#set $refresh_i3status killall -SIGUSR1 i3status
+set $refresh_i3status killall -SIGUSR1 i3blocks
 
 #keybinds
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
@@ -20,9 +43,12 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +5%
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
 
-bindsym $mod+Return exec --no-startup-id kitty
+#bindsym $mod+Return exec --no-startup-id kitty
 bindsym $mod+Shift+q kill
-bindsym $mod+d exec --no-startup-id dmenu_run -fn "DejaVu Sans Mono-10" -nb "#2E3440" -nf "#D8DEE9" -sb "#434C5E" -sf "#E5E9F0" -p "Run:"
+
+bindsym $mod+d exec --no-startup-id dmenu_run -fn "Stack Sans Headline Medium 10" -nb "#2E3440" -nf "#D8DEE9" -sb "#434C5E" -sf "#E5E9F0" -p "Run:"
+#bindsym $mod+d exec --no-startup-id dmenu_run -fn "Stack Sans Headline Medium 10" -nb "$bar-text-color" -nf "#D8DEE9" -sb "#434C5E" -sf "FFFFFF" -p "Run:"
+
 bindsym $mod+Shift+d exec rofi -show drun
 
 # change focus
@@ -101,6 +127,13 @@ mode "resize" {
         bindsym $mod+r mode "default"
 }
 
+bindsym $mod+Tab mode "Cycle scratchpad"; scratchpad show
+mode "Cycle scratchpad"{     
+  bindsym $mod+Tab scratchpad show; scratchpad show     
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
 bindsym $mod+r mode "resize"
 
 #workspace
@@ -142,8 +175,17 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
+
+
+#set_from_resource $bg-color i3wm.color7 
+#set_from_resource $inactive-bg-color i3wm.color2 
+#set_from_resource $$text-color i3wm.color3
+#set_from_resource $inactive-text-color i3wm.color3
+#set_from_resource $urgent-bg-color i3wm.color11
+#set_from_resource $
+
 #original
-set $bg-color	         #2f343f
+set $bg-color            #2f343f
 set $inactive-bg-color   #2f343f
 set $text-color          #f3f4f5
 set $inactive-text-color #676E7D
@@ -156,7 +198,12 @@ client.unfocused        $inactive-bg-color $inactive-bg-color $inactive-text-col
 client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
 client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #00ff00
 
-
+#i3bar
+set_from_resource $bar-text-color i3wm.color0
+set_from_resource $bar-inactive-text-color i3wm.color15
+set_from_resource $bar-bg-color i3wm.color7
+set_from_resource $bar-inactive-bg-color i3wm.color10
+set $bar-urgent-bg-color #E53935
 
 
 hide_edge_borders both
@@ -164,17 +211,18 @@ for_window [class="^.*"] border pixel 0
 
 exec --no-startup-id "picom -b"
 bar {
-		i3bar_command i3bar --transparency
-        status_command SCRIPT_DIR='/home/athul/Files/Scripts' i3blocks -c ~/.config/i3/i3blocks.conf
-        colors {
-		background #00000000
-		separator #757575
-		#                  border             background         text
-		focused_workspace  $bg-color          $bg-color          $text-color
-		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
-		}
-	padding  2
+    i3bar_command i3bar --transparency
+    status_command SCRIPT_DIR='/home/athul/Files/Scripts' i3blocks -c ~/.config/i3/i3blocks.conf
+    
+    colors {
+        background #00000000
+        separator #757575    
+        #                  border                 background             text
+        focused_workspace  $bar-bg-color          $bar-bg-color          $bar-text-color
+        inactive_workspace $bar-inactive-bg-color $bar-inactive-bg-color $bar-inactive-text-color
+        urgent_workspace   $bar-urgent-bg-color   $bar-urgent-bg-color   $text-color
+    }
+    padding 2
     separator_symbol |
     position top
 }
@@ -182,29 +230,49 @@ gaps inner 10
 gaps outer 5
 smart_gaps on
 
+#bar-orginal-colors
+#		#                  border             background         text
+#		focused_workspace  $bg-color          $bg-color          $text-color
+#		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+#		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+	
+
+
+##variables
+set $terminal "alacritty"
+set $fancy_terminal "kitty"
+
+bindsym $mod+Return exec --no-startup-id $terminal
+bindsym $mod+Shift+Return exec --no-startup-id $fancy_terminal
+bindsym $mod+Shift+P move scratchpad
+bindsym $mod+P scratchpad show
+
 #custom(keybinds)
 bindsym $mod+Shift+i exec intellij
 bindsym $mod+t exec thunar
-bindsym $mod+Shift+v  exec diodon
-bindsym $mod+Shift+z exec i3lock-fancy
+bindsym $mod+Shift+v exec diodon
+bindsym $mod+Shift+z exec ~/Files/Scripts/custom_lock.sh
 bindsym $mod+Shift+m exec --no-startup-id setxkbmap us
 bindsym Mod1+F4 exec bash ~/Files/Scripts/shutdown_menu.sh
+bindsym XF86PowerOff exec bash ~/Files/Scripts/shutdown_menu.sh
 bindsym $mod+Shift+e exec i3-msg exit
 bindsym $mod+Shift+f exec i3-msg bar mode toggle
 bindsym $mod+Print exec flameshot gui
-bindsym $mod+Shift+Print exec flameshot full -p ~/Pictures'
+bindsym $mod+Shift+Print exec flameshot full -p ~/Pictures
 #bindsym $mod+Shift+w exec ~/Files/Scripts/wsh.sh
 bindsym $mod+Shift+w exec --no-startup-id systemd-run --user /home/athul/Files/Scripts/wsh.sh
 bindsym $mod+Shift+g exec flatpak run org.gimp.GIMP
+bindsym $mod+Shift+a exec snap run whatsapp-linux-app
 
 #custom(startup or reload)
 exec --no-startup-id /home/athul/Files/Scripts/sudoComannds.sh
-exec --no-startup-id /home/athul/Files/Scripts/monitor_setup.sh
+exec_always --no-startup-id /home/athul/Files/Scripts/monitor_setup.sh
 exec --no-startup-id i3-msg 'workspace 10; exec alacritty -e tty-clock -c -C 5 -s'
 
 #exec_always feh --bg-fill /home/athul/Pictures/wallpaper.jpg
-exec feh --bg-fill /home/athul/Pictures/wallpaper.jpg
-exec --no-startup-id exec wal -i Pictures/wallpaper.jpg
+#exec feh --bg-fill /home/athul/Pictures/wallpaper.jpg
+
+
 
 #load colors using pywall
 #exec --no-startup-id xrdb -merge $HOME/.cache/wal/colors.Xresources

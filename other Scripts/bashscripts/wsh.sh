@@ -1,7 +1,7 @@
 #!/bin/bash
 # ----------------------------------------
-# Wallpaper Selector + Pywal Integration
-# Works from i3 keybind and terminal
+# Wallpaper Selector + Pywal Integration (Optimized)
+# Instant Preview • Fast UI • Pywal After Confirmation
 # ----------------------------------------
 
 # --- ENVIRONMENT FIX ---
@@ -11,12 +11,13 @@ export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus"
 export PATH="$HOME/.local/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
 
 # --- CONFIGURATION ---
-dir="$HOME/Pictures/wallpapers/"               # Wallpaper folder (must end with /)
-permanent_copy_dir="$HOME/Pictures/"           # Folder to copy the chosen wallpaper to
-set_cmd="feh --bg-fill"                        # Wallpaper setter
+dir="$HOME/Pictures/wallpapers/"             
+permanent_copy_dir="$HOME/Pictures/"          
+set_cmd="feh --bg-fill"                       
 rofi_theme="$HOME/.config/rofi/themes/wallpaper-theme.rasi"
 rofi_confirm_theme="$HOME/.config/rofi/themes/wallpaper-theme-options.rasi"
-SCRIPT_PATH="$HOME/Files/Scripts/wsh.sh"       # Absolute path to this script
+SCRIPT_PATH="$HOME/Files/Scripts/wsh.sh"      
+post_script="/home/athul/Files/Scripts/post_wsh.sh"
 
 # --- VALIDATION ---
 cd "$dir" || { echo "Error: Wallpaper directory not found at '$dir'"; exit 1; }
@@ -30,10 +31,13 @@ generate_rofi_list() {
     done
 }
 
-set_wallpaper_and_wal() {
-    local image_path="$1"
-    $set_cmd "$image_path" &
-    wal -i "$image_path"
+apply_wallpaper() {
+    $set_cmd "$1" &
+}
+
+apply_wal_and_post() {
+    wal -i "$1"
+    "$post_script"
 }
 
 set_permanent() {
@@ -45,31 +49,43 @@ original_wallpaper_path="${permanent_copy_dir}wallpaper.jpg"
 original_wallpaper=""
 [ -f "$original_wallpaper_path" ] && original_wallpaper="$original_wallpaper_path"
 
-# Step 1: Wallpaper selection
+# Step 1: Selection
 chosen_wallpaper=$(generate_rofi_list | rofi -dmenu -p "Select Wallpaper" -theme "$rofi_theme")
 [ -z "$chosen_wallpaper" ] && exit 0
 
-# Step 2: Preview + apply Pywal
-set_wallpaper_and_wal "$dir$chosen_wallpaper"
+# Step 2: Instant Preview (NO WAL)
+apply_wallpaper "$dir$chosen_wallpaper"
 
-# Step 3: Confirmation dialog
-confirmation_options=" Go Back\n Set for Session\n Set Permanently"
+# --- FIXED SPACING ICON MENU ---
+confirmation_options="   Go Back\n   Set for Session\n   Set Permanently"
+
+# Step 3: Confirmation Dialog
 chosen_action=$(echo -e "$confirmation_options" | rofi -dmenu -p "Confirm Action" -theme "$rofi_confirm_theme")
 
 case "$chosen_action" in
-    " Go Back")
-        [ -n "$original_wallpaper" ] && set_wallpaper_and_wal "$original_wallpaper"
+    "   Go Back")
+        if [ -n "$original_wallpaper" ]; then
+            apply_wallpaper "$original_wallpaper"
+        fi
         exec "$SCRIPT_PATH"
         ;;
-    " Set for Session")
+
+    "   Set for Session")
+        apply_wal_and_post "$dir$chosen_wallpaper"
         exit 0
         ;;
-    " Set Permanently")
+
+    "   Set Permanently")
         set_permanent
+        apply_wal_and_post "$dir$chosen_wallpaper"
         exit 0
         ;;
+
     *)
-        [ -n "$original_wallpaper" ] && set_wallpaper_and_wal "$original_wallpaper"
+        # If closed or invalid input: revert
+        if [ -n "$original_wallpaper" ]; then
+            apply_wallpaper "$original_wallpaper"
+        fi
         exit 1
         ;;
 esac
